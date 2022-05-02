@@ -11,11 +11,12 @@
 @import "modern-css-reset";
 
 .sr-only {
-  position: absolute;
-  left: -9999px;
-  width: 0;
-  height: 0;
-  overflow: hidden;
+  position: absolute !important;
+  left: -9999px !important;
+  width: 0 !important;
+  height: 0 !important;
+  clip: rect(0, 0, 0, 0) !important;
+  overflow: hidden !important;
 }
 
 html {
@@ -24,54 +25,106 @@ html {
 
 body {
   font-family: "PP Neue Machina", sans-serif;
+  line-height: 1.35;
   color: var(--content-1);
   background: var(--bg-1);
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.c-card {
-  display: flex;
-  flex-direction: column;
-  isolation: isolate;
-  width: 464px;
-  height: 624px;
-  background: var(--bg-1);
-  border: solid 4px var(--content-1);
-  opacity: 0;
-  transform: translate(0);
-  transition: 0.3s transform 0.3s ease-out, 0.3s opacity ease-out;
+  overflow: hidden;
 
   &::before {
     content: "";
     position: absolute;
-    inset: 0;
+    top: 92px;
+    left: -1px;
+    z-index: -1;
+    width: 153px;
+    height: 153px;
+    background: url("/assets/img/bg-1.svg") no-repeat center;
+
+    animation: fadeIn 1s ease-in-out;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    width: 120%;
+    height: 418px;
+    background: url("/assets/img/bg-2.svg") repeat center;
+    transform-origin: 100% 100%;
+    transform: rotate(-6.48deg);
+  }
+}
+
+.c-card {
+  width: 464px;
+  height: 624px;
+  background: var(--bg-1);
+  color: var(--content-1);
+  border: solid 4px var(--content-1);
+  opacity: 0;
+  transform: translate(0);
+  transition: 0.3s transform ease-out, 0.3s opacity 0.3s ease-out;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -4px;
     z-index: -1;
     background: var(--bg-1);
     border: solid 4px var(--content-1);
-    opacity: 0;
     transform: translate(0);
-    transition: 0.3s transform 0.3s ease-out, 0.3s opacity ease-out;
+    transition: 0.3s transform ease-out;
   }
 
-  > * {
-    transition: 0.15s ease-out 0.6s;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    z-index: -1;
+    background: var(--bg-1);
+    border: solid 4px var(--content-1);
+  }
+
+  &__wrap {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    color: var(--content-1);
+    background: var(--bg-1);
+    transition: 0.3s ease-out 0.6s;
     opacity: 0;
+    overflow: hidden;
   }
 
   &__close {
-    margin: 22px 22px 0 0;
+    isolation: isolate;
+    display: block;
+    position: relative;
+    margin: 22px 0 0 22px;
     width: 100px;
     height: 40px;
-
-    color: var(--bg-2);
-    background: var(--content-1);
+    padding: 0;
+    cursor: pointer;
+    color: var(--content-1);
+    background: var(--bg-1);
     transition: 0.15s ease-out;
     overflow: hidden;
-    font-size: 1.125rem;
-    font-weight: 900;
+    font-size: 1rem;
+    font-weight: 500;
+    border: 0;
+
+    img {
+      display: inline-block;
+      margin-right: 8px;
+    }
 
     &::after {
       content: "";
@@ -81,7 +134,7 @@ body {
       z-index: -1;
       width: 130%;
       height: 100%;
-      background: var(--bg-3);
+      background: var(--bg-3, red);
       transition: 0.15s ease-out;
       transform-origin: 100% 0;
       transform: translateX(-100%) skewX(-30deg);
@@ -95,8 +148,30 @@ body {
     }
   }
 
+  &__badge {
+    position: absolute;
+    top: -20px;
+    right: 0;
+    z-index: 1;
+    transform: translateX(50%) rotate(-6deg);
+    width: 125px;
+    height: 125px;
+    background: var(--bg-3) url("/assets/img/badge-arrow.svg") no-repeat center;
+    color: var(--content-1);
+    border-radius: 50%;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url("/assets/img/badge-love.svg") no-repeat center;
+      animation: rotate 15s infinite linear;
+    }
+  }
+
   &__main {
-    margin: 100px 46px;
+    margin: 60px 46px auto;
+    transition: transform 0.3s ease-out;
   }
 
   &__intro {
@@ -118,25 +193,28 @@ body {
 
     [type="radio"] + label {
       --eye-delay: 0s;
-      isolation: isolate;
+      --eye-duration: 10s;
       position: relative;
       display: block;
       width: 56px;
       height: 56px;
       border-radius: 50%;
       transition: 0.3s ease-out;
+      cursor: pointer;
 
-      // &::before {
-      //   content: "";
-      //   position: absolute;
-      //   inset: 0;
-      //   background: radial-gradient(
-      //     93.75% 96.51% at 6.25% 97.32%,
-      //     #000000 0%,
-      //     #ffffff 100%
-      //   );
-      //   mix-blend-mode: overlay;
-      // }
+      &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          93.75% 96.51% at 6.25% 97.32%,
+          #000000 0%,
+          #ffffff 100%
+        );
+        opacity: 0.5;
+        border-radius: 50%;
+        mix-blend-mode: overlay;
+      }
 
       span {
         isolation: isolate;
@@ -146,7 +224,7 @@ body {
         width: 40px;
         height: 8px;
         margin: -4px -20px;
-        color: var(--b-1);
+        color: var(--bg-1);
         transform: translateX(3px);
         transition: 0.3s ease-out;
 
@@ -162,7 +240,8 @@ body {
             height: 8px;
             border-radius: 50%;
             background: currentColor;
-            animation: eye-blink 10s linear var(--eye-delay) infinite;
+            animation: eye-blink var(--eye-duration) linear var(--eye-delay)
+              infinite;
           }
 
           &::after {
@@ -225,6 +304,7 @@ body {
 
       &:nth-child(2) {
         --eye-delay: -1s;
+        --eye-duration: 8s;
         background: #ff603e;
 
         span {
@@ -234,6 +314,7 @@ body {
 
       &:nth-child(4) {
         --eye-delay: -2s;
+        --eye-duration: 9s;
         background: #ff833e;
 
         span {
@@ -243,6 +324,7 @@ body {
 
       &:nth-child(6) {
         --eye-delay: -3s;
+        --eye-duration: 7s;
         background: #ffc061;
 
         span {
@@ -258,6 +340,7 @@ body {
       }
       &:nth-child(8) {
         --eye-delay: -4s;
+        --eye-duration: 6s;
         background: #ffd43e;
 
         span {
@@ -274,6 +357,7 @@ body {
       }
       &:nth-child(10) {
         --eye-delay: -5s;
+        --eye-duration: 9.5s;
         background: #ffed4e;
 
         span {
@@ -303,15 +387,19 @@ body {
         transform: translateX(0);
       }
     }
+
+    [type="radio"]:focus-visible + label {
+      box-shadow: 0 0 0 8px var(--accent);
+    }
   }
 
   &__selected-value {
     margin-top: 24px;
     font-size: 1.125rem;
-    transition: 0.15s ease-out;
+    transition: 0.3s ease-out;
 
     &--hidden {
-      transform: translateY(5px);
+      transform: translateY(15px);
       opacity: 0;
     }
   }
@@ -324,10 +412,12 @@ body {
     padding: 10px;
     color: var(--bg-2);
     background: var(--content-1);
-    transition: 0.15s ease-out;
+    transition: 0.3s ease-out;
     overflow: hidden;
     font-size: 1.125rem;
     font-weight: 900;
+    border: 0;
+    cursor: pointer;
 
     &::before {
       content: "";
@@ -338,45 +428,62 @@ body {
       width: 130%;
       height: 100%;
       background: var(--accent);
-      transition: 0.15s ease-out;
+      transition: 0.2s ease-out;
       transform-origin: 100% 0;
       transform: translateX(-100%) skewX(-30deg);
     }
 
-    &:not(:disabled):hover,
-    &:not(:disabled):focus {
+    &:hover,
+    &:focus {
       &::before {
         transform: translateX(0) skewX(-30deg);
       }
     }
+  }
 
-    &:disabled {
-      transform: translateY(100%);
-      opacity: 0;
-    }
+  :invalid &__main {
+    transform: translateY(40px);
+  }
+
+  :invalid &__submit {
+    transform: translateY(100%);
+    opacity: 0;
+    visibility: hidden;
   }
 
   &--opened {
     opacity: 1;
-    transform: translate(3px, -3px);
+    transform: translate(10px, -8px);
+    transition: 0.3s transform 0.3s ease-out, 0.3s opacity ease-out;
 
     &::before {
-      opacity: 1;
-      transform: translate(-3px, 3px);
+      transform: translate(-20px, 16px);
+      transition: 0.3s transform 0.3s ease-out;
     }
 
-    > * {
-      opacity: 1;
+    .c-card {
+      &__wrap {
+        opacity: 1;
+      }
     }
   }
 }
 
 @keyframes eye-blink {
   0%,
-  20% {
+  3% {
     transform: scaleY(1);
   }
-  10% {
+  1.5% {
     transform: scaleY(0.125);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

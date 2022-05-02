@@ -8,87 +8,93 @@
   </head>
   <body>
     <div id="app">
-      <form class="c-card c-card--opened" action="">
-        <button type="button" class="c-card__close">
-          <img src="assets/img/close.svg" alt="" />
-          Passer
-        </button>
+      <form class="c-card" action="">
+        <div class="c-card__badge"></div>
+        <div class="c-card__wrap">
+          <button type="button" class="c-card__close">
+            <img src="assets/img/close.svg" alt="" />
+            Passer
+          </button>
 
-        <div class="c-card__main">
-          <p class="c-card__intro">
-            Bravo Benjamin, tu viens de télécharger Bootstrap v5.1.3
-          </p>
-
-          <div role="group" aria-labelledby="rate-lengend">
-            <p id="rate-lengend" class="c-card__legend">
-              Dis-nous ce que tu en as pensé !
+          <div class="c-card__main">
+            <p class="c-card__intro">
+              Bravo Benjamin, tu viens de télécharger Bootstrap v5.1.3
             </p>
 
-            <div class="c-card__radios">
-              <input
-                type="radio"
-                name="rate"
-                value="1"
-                id="rate-1"
-                class="sr-only"
-              />
-              <label for="rate-1">
-                <span><i></i><i></i><i></i></span>
-                <span class="sr-only">1 sur 5</span>
-              </label>
-              <input
-                type="radio"
-                name="rate"
-                value="2"
-                id="rate-2"
-                class="sr-only"
-              />
-              <label for="rate-2">
-                <span><i></i><i></i></span>
-                <span class="sr-only">2 sur 5</span>
-              </label>
-              <input
-                type="radio"
-                name="rate"
-                value="3"
-                id="rate-3"
-                class="sr-only"
-              />
-              <label for="rate-3">
-                <span><i></i><i></i></span>
-                <span class="sr-only">3 sur 5</span>
-              </label>
-              <input
-                type="radio"
-                name="rate"
-                value="4"
-                id="rate-4"
-                class="sr-only"
-              />
-              <label for="rate-4">
-                <span><i></i><i></i></span>
-                <span class="sr-only">4 sur 5</span>
-              </label>
-              <input
-                type="radio"
-                name="rate"
-                value="5"
-                id="rate-5"
-                class="sr-only"
-              />
-              <label for="rate-5">
-                <span><i></i><i></i></span>
-                <span class="sr-only">5 sur 5</span>
-              </label>
-            </div>
+            <div role="group" aria-labelledby="rate-lengend">
+              <p id="rate-lengend" class="c-card__legend">
+                Dis-nous ce que tu en as pensé !
+              </p>
 
-            <div class="c-card__selected-value c-card__selected-value--hidden">
-              4/5 — Au top !
+              <div class="c-card__radios">
+                <input
+                  type="radio"
+                  required
+                  name="rate"
+                  value="1"
+                  id="rate-1"
+                  class="sr-only"
+                />
+                <label for="rate-1">
+                  <span><i></i><i></i><i></i></span>
+                  <span class="sr-only">1 sur 5</span>
+                </label>
+                <input
+                  type="radio"
+                  required
+                  name="rate"
+                  value="2"
+                  id="rate-2"
+                  class="sr-only"
+                />
+                <label for="rate-2">
+                  <span><i></i><i></i></span>
+                  <span class="sr-only">2 sur 5</span>
+                </label>
+                <input
+                  type="radio"
+                  required
+                  name="rate"
+                  value="3"
+                  id="rate-3"
+                  class="sr-only"
+                />
+                <label for="rate-3">
+                  <span><i></i><i></i></span>
+                  <span class="sr-only">3 sur 5</span>
+                </label>
+                <input
+                  type="radio"
+                  required
+                  name="rate"
+                  value="4"
+                  id="rate-4"
+                  class="sr-only"
+                />
+                <label for="rate-4">
+                  <span><i></i><i></i></span>
+                  <span class="sr-only">4 sur 5</span>
+                </label>
+                <input
+                  type="radio"
+                  required
+                  name="rate"
+                  value="5"
+                  id="rate-5"
+                  class="sr-only"
+                />
+                <label for="rate-5">
+                  <span><i></i><i></i></span>
+                  <span class="sr-only">5 sur 5</span>
+                </label>
+              </div>
+
+              <div class="c-card__selected-value"></div>
             </div>
           </div>
-        </div>
 
-        <button class="c-card__submit" type="submit" disabled>Envoyer</button>
+          <button class="c-card__submit" type="submit">Envoyer</button>
+        </div>
       </form>
     </div>
 
